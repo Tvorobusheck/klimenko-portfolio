@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo \"Skip building\"",
-    "start": "http-server ."
+    "start": "nohup http-server . > http.log 2>&1 &"
   },
   "repository": {
     "type": "git",
