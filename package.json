@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server . -p 80 &"
+    "build": "echo \"Skip building\"",
+    "start": "http-server ."
   },
   "repository": {
     "type": "git",
