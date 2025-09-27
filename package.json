@@ -1,25 +1,31 @@
 {
   "name": "klimenko-portfolio",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "Portfolio website for Vladislav Klimenko",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"Skip building\"",
-    "start": "nohup http-server . > http.log 2>&1 &"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.3.0",
+    "vue-router": "^4.2.0",
+    "bootstrap": "^5.3.0",
+    "@popperjs/core": "^2.11.8",
+    "@fortawesome/fontawesome-free": "^6.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "vite": "^4.3.9"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tvorobusheck/klimenko-portfolio.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Tvorobusheck/klimenko-portfolio/issues"
   },
-  "homepage": "https://github.com/Tvorobusheck/klimenko-portfolio#readme",
-  "devDependencies": {
-    "http-server": "^14.1.1"
-  }
+  "homepage": "https://github.com/Tvorobusheck/klimenko-portfolio#readme"
 }
