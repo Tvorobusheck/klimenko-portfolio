@@ -154,7 +154,7 @@ h2 {
 
 /* Sections */
 section {
-  padding: 4rem 0;
+  padding: 4rem;
   position: relative;
   background-color: #fff;
   margin-bottom: 1.5rem;
