@@ -1,111 +1,72 @@
 <template>
   <section id="projects" class="mb-5">
-    <h2><i class="fas fa-code"></i> Мои проекты</h2>
-    <p>Каждый проект создан мной в одиночку.</p>
+    <h2><i class="fas fa-code me-2"></i> {{ t('projects.title') }}</h2>
     
-    <div class="project">
-      <h3>Проект 1: PWA-приложение ЗдоровоПит </h3>
-      <div id="carouselProject1" class="carousel slide" data-ride="carousel" data-interval="3000" data-pause="hover">
+    <div v-for="(project, index) in t('projects.items')" :key="index" class="project mb-5">
+      <h3>{{ project.title }}</h3>
+      
+      <div v-if="project.images" :id="'carouselProject' + index" class="carousel slide mb-3" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="hover">
         <div class="carousel-inner">
-          <div v-for="(image, index) in healthyEatImages" :key="index" :class="['carousel-item', { 'active': index === 0 }]">
-            <img :src="image" class="d-block w-100" :alt="'ЗдоровоПит скриншот ' + (index + 1)" @click="openFullscreen($event)">
+          <div v-for="(image, imgIndex) in project.images" :key="imgIndex" :class="['carousel-item', { 'active': imgIndex === 0 }]">
+            <img :src="image" class="d-block w-100" :alt="project.title + ' screenshot ' + (imgIndex + 1)" @click="openFullscreen($event)">
           </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselProject1" role="button" data-slide="prev">
+        <button v-if="project.images.length > 1" class="carousel-control-prev" type="button" :data-bs-target="'#carouselProject' + index" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Предыдущий</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselProject1" role="button" data-slide="next">
+          <span class="visually-hidden">{{ t('projects.previous') }}</span>
+        </button>
+        <button v-if="project.images.length > 1" class="carousel-control-next" type="button" :data-bs-target="'#carouselProject' + index" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Следующий</span>
-        </a>
+          <span class="visually-hidden">{{ t('projects.next') }}</span>
+        </button>
       </div>
-      <p>ЗдоровоПит - это удобное приложение для контроля питания доступное на всех платформах. </p>
-      Основные функции:
-      <ul>
-        <li>Регистрация, авторизация и восстановление пароля.</li>
-        <li>Оплата через ЮКассу, промокоды и партнерская программа.</li>
-        <li>Дневник питания с автозаполнением на основе расписания питания.</li>
-        <li>Добавление и просмотр диет с возможностью активации расписания питания.</li>
-        <li>Расписание питания.</li>
-        <li>Информация о продуктах питания.</li>
-      </ul>
-      <p><strong>Технологический стек:</strong> Fastapi, Python, Flutter, HTML, CSS, JavaScript, Docker, Nginx, PostgreSQL, Git, OAuth, Youkassa</p>
-    </div>
-
-    <div class="project">
-      <h3>Проект 2: Сайт для общения с ChatGPT</h3>
-      <div id="carouselProject2" class="carousel slide" data-ride="carousel" data-interval="3000" data-pause="hover">
-        <div class="carousel-inner">
-          <div v-for="(image, index) in chatGptImages" :key="index" :class="['carousel-item', { 'active': index === 0 }]">
-            <img :src="image" class="d-block w-100" :alt="'ChatGPT скриншот ' + (index + 1)" @click="openFullscreen($event)">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselProject2" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Предыдущий</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselProject2" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Следующий</span>
-        </a>
-      </div>
-      <p>chatgptin.ru позволял общаться с ChatGPT, когда эта нейросеть начинала набирать обороты. Также была поддержка генерации изображений через Dall-E. Технически все хорошо работало и нравилось пользователям. Однако проект пришлось закрыть, так как реклама не окупала затраты на инфраструктуру и api-ключи ChatGPT.</p>
-      <p><strong>Технологический стек:</strong> Django, Python, HTML, CSS, JavaScript, Docker, Docker Registry, Docker Swarm, Jenkins, Celery, Redis, WebSocket, Nginx, PostgreSQL, Git</p>
-    </div>
-
-    <div class="project">
-      <h3>Проект 3: Решатель задачи линейного раскроя</h3>
-      <div id="carouselProject3" class="carousel slide" data-ride="carousel" data-interval="3000" data-pause="hover">
-        <div class="carousel-inner">
-          <div v-for="(image, index) in robopaperImages" :key="index" :class="['carousel-item', { 'active': index === 0 }]">
-            <img :src="image" class="d-block w-100" :alt="'Robopaper скриншот ' + (index + 1)" @click="openFullscreen($event)">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselProject3" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Предыдущий</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselProject3" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Следующий</span>
-        </a>
-      </div>
-      <p>Данный проект был разработан в рамках моей научной диссертации. По мере развития научных разработок я планирую дорабатывать Robopaper.</p>
-      <p><strong>Технологический стек:</strong> Django, Python, HTML, CSS, JavaScript, PostgreSQL</p>
-      <a href="https://robopaper.ru" class="btn btn-primary" target="_blank">Опробовать проект</a>
+      
+      <p v-html="project.description"></p>
+      <p v-if="project.technologies"><strong>{{ t('projects.technologies') }}:</strong> {{ project.technologies }}</p>
+      <a v-if="project.url" :href="project.url" class="btn btn-primary" target="_blank">{{ t('projects.tryProject') }}</a>
     </div>
   </section>
 </template>
 
 <script>
+import { useTranslations } from '@/composables/useTranslations';
+
 export default {
   name: 'ProjectsSection',
-  data() {
+  setup() {
+    const { t } = useTranslations();
+    
+    const healthyEatImages = [
+      '/images/healthyeat/registration.png',
+      '/images/healthyeat/login.png',
+      '/images/healthyeat/pay.png',
+      '/images/healthyeat/meal.png',
+      '/images/healthyeat/diary.png',
+      '/images/healthyeat/schedule.png',
+      '/images/healthyeat/diet.png',
+      '/images/healthyeat/swagger.png',
+      '/images/healthyeat/redoc.png'
+    ];
+    
+    const chatGptImages = [
+      '/images/chatgptinru/main.png',
+      '/images/chatgptinru/feedback.png',
+      '/images/chatgptinru/performance.png',
+      '/images/chatgptinru/metrika.png',
+      '/images/chatgptinru/panel.png'
+    ];
+    
+    const robopaperImages = [
+      '/images/robopaper/main.png',
+      '/images/robopaper/feedback.png'
+    ];
+
     return {
-      healthyEatImages: [
-        '/images/healthyeat/registration.png',
-        '/images/healthyeat/login.png',
-        '/images/healthyeat/pay.png',
-        '/images/healthyeat/meal.png',
-        '/images/healthyeat/diary.png',
-        '/images/healthyeat/schedule.png',
-        '/images/healthyeat/diet.png',
-        '/images/healthyeat/swagger.png',
-        '/images/healthyeat/redoc.png'
-      ],
-      chatGptImages: [
-        '/images/chatgptinru/main.png',
-        '/images/chatgptinru/feedback.png',
-        '/images/chatgptinru/performance.png',
-        '/images/chatgptinru/metrika.png',
-        '/images/chatgptinru/panel.png'
-      ],
-      robopaperImages: [
-        '/images/robopaper/main.png',
-        '/images/robopaper/feedback.png'
-      ]
-    }
+      t,
+      healthyEatImages,
+      chatGptImages,
+      robopaperImages
+    };
   },
   methods: {
     openFullscreen(event) {
@@ -122,10 +83,41 @@ export default {
     }
   },
   mounted() {
-    // Initialize carousels after component is mounted
-    if (typeof $ !== 'undefined') {
-      $('.carousel').carousel();
-    }
+    // Initialize Bootstrap carousels
+    import('bootstrap/js/dist/carousel').then(({ Carousel }) => {
+      document.querySelectorAll('.carousel').forEach(carouselEl => {
+        new Carousel(carouselEl);
+      });
+    });
   }
-}
+};
 </script>
+
+<style scoped>
+.project {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.carousel {
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item img {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.carousel-item img:hover {
+  transform: scale(1.02);
+}
+
+.btn {
+  margin-top: 1rem;
+}
+</style>

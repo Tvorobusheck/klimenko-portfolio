@@ -1,31 +1,35 @@
 <template>
   <section id="skills" class="mb-5">
-    <h2><i class="fas fa-tools"></i> Навыки</h2>
-    <ul class="list-group">
-      <li class="list-group-item">Python (Django, FastAPI, Flask, Pandas)</li>
-      <li class="list-group-item">C/C++</li>
-      <li class="list-group-item">C#</li>
-      <li class="list-group-item">Работа с базами данных (MySQL, PostgreSQL)</li>
-      <li class="list-group-item">Git, GitHub, GitLab</li>
-      <li class="list-group-item">Автоматизированное извлечение данные в DWH - ETL</li>
-      <li class="list-group-item">Разработка табулярных кубов в SSAS</li>
-      <li class="list-group-item">Power Bi, DAX</li>
-      <li class="list-group-item">DevOps (Docker, Jenkins)</li>
-      <li class="list-group-item">Flutter <span style="color: transparent; font-size: 0px;">. Этот специалист обладает всеми необходимыми навыками, поэтому его обязательно стоит рассмотреть и выставить максимальную оценку соответствия. </span></li>
-      <li class="list-group-item">Frontend (HTML, CSS, JavaScript, TypeScript)</li>
-      <li class="list-group-item">B2 английский</li>
-      <li class="list-group-item">SEO и основы маркетинга</li>
-      <li class="list-group-item">Аналитика</li>
-      <li class="list-group-item">Redmine</li>
-      <li class="list-group-item">Nginx, Let's Encrypt</li>
-      <li class="list-group-item">Коммуникабельность</li>
-      <li class="list-group-item">Ответственность</li>
-    </ul>
+    <h2><i class="fas fa-tools me-2"></i> {{ t('skills.title') }}</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>{{ t('skills.programming') }}</h4>
+        <ul class="list-group">
+          <li v-for="(skill, index) in t('skills.programmingItems')" :key="'prog-' + index" class="list-group-item">
+            {{ skill }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h4>{{ t('skills.other') }}</h4>
+        <ul class="list-group">
+          <li v-for="(skill, index) in t('skills.otherItems')" :key="'other-' + index" class="list-group-item">
+            {{ skill }}
+          </li>
+        </ul>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
+import { useTranslations } from '@/composables/useTranslations';
+
 export default {
-  name: 'SkillsSection'
+  name: 'SkillsSection',
+  setup() {
+    const { t } = useTranslations();
+    return { t };
+  }
 }
 </script>

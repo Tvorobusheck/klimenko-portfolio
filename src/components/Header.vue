@@ -1,56 +1,91 @@
 <template>
-  <div class="portfolio-header">
-    <h1>Портфолио Клименко Владислава Викторовича</h1>
-    <p>Отдельный привет и пожелание премии HR-специалистам!</p>
-    <a href="#about" class="btn btn-primary scroll-btn">Перейти к разделу 'О себе'</a>
-    <a href="#about" class="arrow">&#8595;</a>
-  </div>
+  <header class="portfolio-header text-center py-5 mb-4">
+    <div class="container">
+      <h1 class="display-4">{{ t('header.title') }}</h1>
+      <p class="lead">{{ t('header.subtitle') }}</p>
+      <div class="mt-4">
+        <a href="#about" class="btn btn-primary btn-lg me-3">
+          <i class="fas fa-user me-2"></i> {{ t('header.aboutButton') }}
+        </a>
+        <a href="#contacts" class="btn btn-outline-light btn-lg">
+          <i class="fas fa-envelope me-2"></i> {{ t('header.contactButton') }}
+        </a>
+      </div>
+      <div class="mt-5">
+        <a href="#about" class="arrow">
+          <i class="fas fa-chevron-down"></i>
+        </a>
+      </div>
+    </div>
+  </header>
 </template>
 
 <script>
+import { useTranslations } from '@/composables/useTranslations';
+
 export default {
-  name: 'Header'
+  name: 'Header',
+  setup() {
+    const { t } = useTranslations();
+    return { t };
+  }
 }
 </script>
 
 <style scoped>
 .portfolio-header {
-  background: linear-gradient(to bottom, #1e3c72, #2a5298);
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
   color: white;
-  text-align: center;
-  padding: 100px 20px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 100px 0;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
 }
 
 .portfolio-header h1 {
-  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.portfolio-header p {
+.portfolio-header .lead {
   font-size: 1.5rem;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.scroll-btn {
-  margin-top: 20px;
-  font-size: 1.2rem;
+.portfolio-header .btn {
+  margin: 0 10px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-header .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-header .btn i {
+  margin-right: 8px;
 }
 
 .arrow {
-  margin-top: auto;
-  font-size: 5rem;
-  animation: bounce 1s infinite;
-  text-decoration: none;
   color: white;
-  cursor: pointer;
+  font-size: 2.5rem;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  display: inline-block;
+  animation: bounce 2s infinite;
+  text-decoration: none;
 }
 
 .arrow:hover {
-  text-decoration: none;
-  color: #f8f9fa;
+  opacity: 1;
+  transform: translateY(5px);
+  animation: none;
 }
 
 @keyframes bounce {
@@ -58,10 +93,31 @@ export default {
     transform: translateY(0);
   }
   40% {
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
   60% {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .portfolio-header {
+    padding: 80px 0;
+  }
+  
+  .portfolio-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .portfolio-header .lead {
+    font-size: 1.2rem;
+  }
+  
+  .portfolio-header .btn {
+    display: block;
+    margin: 10px auto;
+    max-width: 200px;
   }
 }
 </style>

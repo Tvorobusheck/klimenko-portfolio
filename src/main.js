@@ -1,24 +1,20 @@
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 import App from './App.vue';
 
-// Import jQuery and Bootstrap JS
-import $ from 'jquery';
-import 'bootstrap';
-import 'popper.js';
-
-// Make jQuery available globally
-window.$ = $;
-window.jQuery = $;
+// Import Bootstrap 5
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 // Import Font Awesome
 import '@fortawesome/fontawesome-free/js/all';
 
-// Create and mount the Vue app
+// Create app
 const app = createApp(App);
-app.mount('#app');
 
-// Initialize tooltips and popovers
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-  $('[data-toggle="popover"]').popover();
-});
+// Use Pinia
+const pinia = createPinia();
+app.use(pinia);
+
+// Mount the app
+app.mount('#app');
