@@ -1,37 +1,60 @@
-# vklimenko
+# Портфолио Клименко Владислава
 
-This template should help get you started developing with Vue 3 in Vite.
+Этот проект представляет собой персональное портфолио, разработанное с использованием Vue 3, Vite и Bootstrap 4.
 
-## Recommended IDE Setup
+## 🚀 Технологии
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue 3 (Composition API)
+- Vite
+- Bootstrap 4
+- Font Awesome 5
+- jQuery (для Bootstrap компонентов)
+- Popper.js (для выпадающих меню и тултипов)
 
-## Recommended Browser Setup
+## 🛠️ Установка и запуск
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+1. Установите зависимости:
+   ```bash
+   npm install
+   ```
 
-## Customize configuration
+2. Запустите сервер для разработки:
+   ```bash
+   npm run dev
+   ```
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+3. Соберите проект для продакшена:
+   ```bash
+   npm run build
+   ```
 
-## Project Setup
+## 📁 Структура проекта
 
-```sh
-npm install
+```
+src/
+├── assets/          # Статические ассеты
+├── components/      # Компоненты Vue
+│   ├── layout/      # Компоненты макета (шапка, подвал и т.д.)
+│   └── sections/    # Секции страницы
+├── App.vue         # Главный компонент приложения
+└── main.js         # Точка входа приложения
 ```
 
-### Compile and Hot-Reload for Development
+## 🌐 Развертывание
+
+Собранные файлы находятся в директории `dist/`. Вы можете развернуть их на любом веб-сервере.
+
+## 📜 Лицензия
+
+Этот проект распространяется под лицензией MIT.
+
+### Запуск сервера для разработки
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Сборка для продакшена
 
 ```sh
 npm run build
