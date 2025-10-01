@@ -14,9 +14,6 @@
           <a href="https://github.com/Tvorobusheck" target="_blank" class="btn btn-outline-primary btn-lg">
             <i class="fab fa-github me-2"></i> GitHub
           </a>
-          <a href="https://linkedin.com/in/tvorobusheck" target="_blank" class="btn btn-outline-primary btn-lg">
-            <i class="fab fa-linkedin me-2"></i> LinkedIn
-          </a>
         </div>
       </div>
     </div>
