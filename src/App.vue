@@ -253,7 +253,7 @@ section {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   section {
-    padding: 2rem 0;
+    padding: 2rem 1rem;
   }
   
   h1 {
