@@ -8,7 +8,7 @@
       <div v-if="project.images" :id="'carouselProject' + index" class="carousel slide mb-3" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="hover">
         <div class="carousel-inner">
           <div v-for="(image, imgIndex) in project.images" :key="imgIndex" :class="['carousel-item', { 'active': imgIndex === 0 }]">
-            <img :src="image" class="d-block w-100" :alt="project.title + ' screenshot ' + (imgIndex + 1)" @click="openFullscreen($event)">
+            <img :src="image" class="d-block w-100" :alt="project.title + ' screenshot ' + (imgIndex + 1)">
           </div>
         </div>
         <button v-if="project.images.length > 1" class="carousel-control-prev" type="button" :data-bs-target="'#carouselProject' + index" data-bs-slide="prev">
@@ -67,20 +67,7 @@ export default {
       robopaperImages
     };
   },
-  methods: {
-    openFullscreen(event) {
-      const img = event.target;
-      if (img.requestFullscreen) {
-        img.requestFullscreen();
-      } else if (img.mozRequestFullScreen) {
-        img.mozRequestFullScreen();
-      } else if (img.webkitRequestFullscreen) {
-        img.webkitRequestFullscreen();
-      } else if (img.msRequestFullscreen) {
-        img.msRequestFullscreen();
-      }
-    }
-  },
+  methods: {},
   mounted() {
     // Initialize Bootstrap carousels
     import('bootstrap/js/dist/carousel').then(({ Carousel }) => {
