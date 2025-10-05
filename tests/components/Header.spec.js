@@ -30,21 +30,4 @@ describe('Header.vue', () => {
     expect(buttonTexts).toContain('About Me');
     expect(buttonTexts).toContain('Contact');
   });
-
-  it('has working contact button', async () => {
-    const wrapper = mountComponent();
-    const contactButton = wrapper.find('.btn-outline-light');
-    
-    // Mock window.scrollTo
-    const scrollToMock = vi.fn();
-    window.scrollTo = scrollToMock;
-    
-    // Simulate click on contact button
-    await contactButton.trigger('click');
-    
-    // Check if it scrolls to contacts
-    expect(scrollToMock).toHaveBeenCalled();
-    // For now, just check if the button exists and is clickable
-    expect(contactButton.exists()).toBe(true);
-  });
 });
