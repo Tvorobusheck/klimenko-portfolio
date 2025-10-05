@@ -23,7 +23,6 @@
       
       <p v-html="project.description"></p>
       <p v-if="project.technologies"><strong>{{ t('projects.technologies') }}:</strong> {{ project.technologies }}</p>
-      <a v-if="project.url" :href="project.url" class="btn btn-primary" target="_blank">{{ t('projects.tryProject') }}</a>
     </div>
   </section>
 </template>
@@ -99,6 +98,21 @@ export default {
   padding: 1.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  color: #212529; /* Default text color for light mode */
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .project {
+    background: #2d2d2d;
+    color: #f8f9fa; /* Light text color for dark mode */
+  }
+  
+  .project h3,
+  .project p,
+  .project .text-muted {
+    color: #f8f9fa !important; /* Force light text in dark mode */
+  }
 }
 
 .carousel {
