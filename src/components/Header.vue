@@ -10,7 +10,7 @@
         <a href="#contacts" class="btn btn-outline-light btn-lg">
           <i class="fas fa-envelope me-2"></i> {{ t('header.contactButton') }}
         </a>
-      </div>
+        </div>
       <div class="mt-5">
         <a href="#about" class="arrow">
           <i class="fas fa-chevron-down"></i>
@@ -36,22 +36,33 @@ export default {
 .portfolio-header {
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
   color: white;
-  padding: 100px 0;
-  margin-top: 60px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
   position: relative;
   overflow: hidden;
+  margin-top: 0;
 }
 
 .portfolio-header h1 {
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 2.8rem;
+  line-height: 1.2;
 }
 
 .portfolio-header .lead {
   font-size: 1.5rem;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 .portfolio-header .btn {
