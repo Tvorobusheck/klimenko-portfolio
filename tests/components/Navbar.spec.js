@@ -54,7 +54,7 @@ describe('Navbar.vue', () => {
     // Check the brand (hardcoded)
     const brand = wrapper.find('.navbar-brand');
     expect(brand.exists()).toBe(true);
-    expect(brand.text()).toBe('Клименко');
+    expect(brand.text()).toBe('nav.name');
     
     // Get all navigation links
     const navLinks = wrapper.findAll('.nav-link');
