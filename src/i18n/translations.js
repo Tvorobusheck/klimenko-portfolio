@@ -7,6 +7,7 @@ const translations = {
       contactButton: 'Связаться'
     },
     nav: {
+      name: 'Клименко',
       about: 'О себе',
       education: 'Образование',
       achievements: 'Достижения',
@@ -131,6 +132,7 @@ const translations = {
       contactButton: 'Contact Me'
     },
     nav: {
+      name: 'Klimenko',
       about: 'About Me',
       education: 'Education',
       achievements: 'Achievements',

@@ -95,8 +95,8 @@ export default {
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
 
 :root {
-  --primary-color: #1e3c72;
-  --primary-hover: #2a5298;
+  --primary-color: #0d6efd;
+  --primary-hover: #0b5ed7;
   --secondary-color: #6c757d;
   --light-color: #f8f9fa;
   --dark-color: #212529;
