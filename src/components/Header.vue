@@ -10,7 +10,7 @@
         <a href="#contacts" class="btn btn-outline-light btn-lg">
           <i class="fas fa-envelope me-2"></i> {{ t('header.contactButton') }}
         </a>
-        </div>
+      </div>
       <div class="mt-5">
         <a href="#about" class="arrow">
           <i class="fas fa-chevron-down"></i>
