@@ -24,7 +24,7 @@ export default {
           'Именная стипендия Республики Карелия за научные достижения',
           'Участие в полуфинале чемпионата мира по олимпиадному программированию (<a href="https://neerc.ifmo.ru/archive/2018/standings.html" target="_blank" rel="noopener noreferrer">ICPC 2018</a>)',
           'Научные публикации и конференции, включая международные (<a href="https://www.researchgate.net/profile/Vladislav-Klimenko" target="_blank" rel="noopener noreferrer">ResearchGate</a>, <a href="https://orcid.org/0009-0000-0783-7565" target="_blank" rel="noopener noreferrer">ORCID</a>)',
-          'Преподавание в университете',
+          'Преподавание в университете (2 года)',
           'Опыт предпринимательства'
         ];
       } else {
@@ -33,7 +33,7 @@ export default {
           'Named scholarship of the Republic of Karelia for scientific achievements',
           'Participation in the semifinals of the International Collegiate Programming Contest (<a href="https://neerc.ifmo.ru/archive/2018/standings.html" target="_blank" rel="noopener noreferrer">ICPC 2018</a>)',
           'Scientific publications and conferences, including international ones (<a href="https://www.researchgate.net/profile/Vladislav-Klimenko" target="_blank" rel="noopener noreferrer">ResearchGate</a>, <a href="https://orcid.org/0009-0000-0783-7565" target="_blank" rel="noopener noreferrer">ORCID</a>)',
-          'University teaching',
+          'University teaching (2 years)',
           'Entrepreneurship experience'
         ];
       }

@@ -2,7 +2,7 @@ const translations = {
   ru: {
     header: {
       title: 'Клименко Владислав Викторович',
-      subtitle: 'Разработчик программного обеспечения | Преподаватель',
+      subtitle: 'Разработчик программного обеспечения, ученый',
       aboutButton: 'Обо мне',
       contactButton: 'Связаться'
     },
@@ -18,7 +18,7 @@ const translations = {
     about: {
       title: 'О себе',
       content: 'Я профессиональный разработчик, специализирующийся на веб-программировании, уже около 5 лет я работаю программистом. Мне нравится создавать код, который решает проблемы клиентов и создает прибыль компании.',
-      additional: 'Помимо программирования я обучаюсь в аспирантуре и занимаюсь наукой в области алгоритмов. Тема моей диссертации - это решение задачи линейного раскроя. Также я являюсь действующим преподавателем Петрозаводского государственного университета и преподаю алгоритмы и структуры данных.'
+      additional: 'Помимо программирования я обучаюсь в аспирантуре и занимаюсь наукой в области алгоритмов. Тема моей диссертации - это решение задачи линейного раскроя. Также я был преподавателем в Петрозаводском государственном университете и преподавал алгоритмы и структуры данных.'
     },
     education: {
       title: 'Образование',
@@ -127,7 +127,7 @@ const translations = {
   en: {
     header: {
       title: 'Vladislav Klimenko',
-      subtitle: 'Software Developer | Lecturer',
+      subtitle: 'Software Developer, Scientist',
       aboutButton: 'About Me',
       contactButton: 'Contact Me'
     },
@@ -143,7 +143,7 @@ const translations = {
     about: {
       title: 'About Me',
       content: 'I am a professional developer specializing in web programming, with about 5 years of experience as a programmer. I enjoy creating code that solves clients\' problems and generates company profit.',
-      additional: 'In addition to programming, I am pursuing a postgraduate degree and conducting research in the field of algorithms. The topic of my dissertation is the solution to the linear cutting stock problem. I am also a current lecturer at Petrozavodsk State University, where I teach algorithms and data structures.'
+      additional: 'In addition to programming, I am pursuing a postgraduate degree and conducting research in the field of algorithms. The topic of my dissertation is the solution to the linear cutting stock problem. I am also a ex lecturer at Petrozavodsk State University, where I taught algorithms and data structures.'
     },
     education: {
       title: 'Education',
