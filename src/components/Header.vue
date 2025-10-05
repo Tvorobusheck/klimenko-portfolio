@@ -3,8 +3,8 @@
     <div class="container">
       <h1 class="display-4">{{ t('header.title') }}</h1>
       <p class="lead">{{ t('header.subtitle') }}</p>
-      <div class="mt-4">
-        <a href="#about" class="btn btn-primary btn-lg me-3">
+      <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
+        <a href="#about" class="btn btn-primary btn-lg">
           <i class="fas fa-user me-2"></i> {{ t('header.aboutButton') }}
         </a>
         <a href="#contacts" class="btn btn-outline-light btn-lg">
