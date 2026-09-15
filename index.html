@@ -416,6 +416,7 @@
         <ul class="list-group">
             <li class="list-group-item" data-i18n="education.bachelor">Бакалавриат «Программная инженерия» - красный диплом</li>
             <li class="list-group-item" data-i18n="education.master">Магистратура «Информационные системы и технологии. Data Science» - красный диплом</li>
+            <li class="list-group-item" data-i18n="education.phd">Аспирантура «Математическое моделирование, численные методы и комплексы программ»</li>
         </ul>
     </section>
 
@@ -491,7 +492,8 @@
             education: {
                 title: 'Образование',
                 bachelor: 'Бакалавриат «Программная инженерия» - красный диплом',
-                master: 'Магистратура «Информационные системы и технологии. Data Science» - красный диплом'
+                master: 'Магистратура «Информационные системы и технологии. Data Science» - красный диплом',
+                phd: 'Аспирантура «Математическое моделирование, численные методы и комплексы программ»'
             },
             achievements: {
                 title: 'Достижения и опыт',
@@ -536,7 +538,6 @@
                 previous: 'Предыдущий',
                 next: 'Следующий',
                 technologies: 'Технологии',
-                tryProject: 'Опробовать проект',
                 items: [
                     {
                         title: 'HealthyEat',
@@ -573,8 +574,7 @@
                         images: [
                             '/images/robopaper/main.png',
                             '/images/robopaper/feedback.png'
-                        ],
-                        url: 'https://robopaper.ru'
+                        ]
                     }
                 ]
             }
@@ -603,7 +603,8 @@
             education: {
                 title: 'Education',
                 bachelor: 'Bachelor\'s degree in Software Engineering - with honors',
-                master: 'Master\'s degree in Information Systems and Technologies. Data Science - with honors'
+                master: 'Master\'s degree in Information Systems and Technologies. Data Science - with honors',
+                phd: 'Postgraduate studies in Mathematical Modeling, Numerical Methods and Program Complexes'
             },
             achievements: {
                 title: 'Achievements and Experience',
@@ -648,7 +649,6 @@
                 previous: 'Previous',
                 next: 'Next',
                 technologies: 'Technologies',
-                tryProject: 'Try Project',
                 items: [
                     {
                         title: 'HealthyEat',
@@ -685,8 +685,7 @@
                         images: [
                             '/images/robopaper/main.png',
                             '/images/robopaper/feedback.png'
-                        ],
-                        url: 'https://robopaper.ru'
+                        ]
                     }
                 ]
             }
@@ -725,8 +724,6 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">${t('projects.next')}</span>
                 </button>` : '';
-            const tryButton = project.url ? `
-                <a href="${project.url}" class="btn btn-primary mt-3" target="_blank" rel="noopener noreferrer">${t('projects.tryProject')}</a>` : '';
             return `
                 <div class="project mb-5">
                     <h3>${project.title}</h3>
@@ -736,7 +733,6 @@
                     </div>
                     <p>${project.description}</p>
                     <p><strong>${t('projects.technologies')}:</strong> ${project.technologies}</p>
-                    ${tryButton}
                 </div>`;
         }).join('');
 
