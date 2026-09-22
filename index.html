@@ -538,9 +538,11 @@
                 previous: 'Предыдущий',
                 next: 'Следующий',
                 technologies: 'Технологии',
+                tryDemo: 'Попробовать демо',
                 items: [
                     {
-                        title: 'HealthyEat',
+                        title: 'ЗдоровоПит',
+                        demoUrl: 'https://zdorovopit.vklimenko.ru',
                         description: 'Сервис по доставке здорового питания с возможностью подбора индивидуального рациона в зависимости от целей пользователя (похудение, набор мышечной массы, поддержание веса).',
                         technologies: 'Django, Python, HTML, CSS, JavaScript, Docker, Docker Registry, Docker Swarm, Jenkins, Celery, Redis, WebSocket, Nginx, PostgreSQL, Git',
                         images: [
@@ -649,9 +651,11 @@
                 previous: 'Previous',
                 next: 'Next',
                 technologies: 'Technologies',
+                tryDemo: 'Try demo',
                 items: [
                     {
-                        title: 'HealthyEat',
+                        title: 'ЗдоровоПит',
+                        demoUrl: 'https://zdorovopit.vklimenko.ru',
                         description: 'A healthy food delivery service with the ability to select an individual diet based on user goals (weight loss, muscle gain, weight maintenance).',
                         technologies: 'Django, Python, HTML, CSS, JavaScript, Docker, Docker Registry, Docker Swarm, Jenkins, Celery, Redis, WebSocket, Nginx, PostgreSQL, Git',
                         images: [
@@ -733,6 +737,7 @@
                     </div>
                     <p>${project.description}</p>
                     <p><strong>${t('projects.technologies')}:</strong> ${project.technologies}</p>
+                    ${project.demoUrl ? `<a class="btn btn-primary" href="${project.demoUrl}" target="_blank" rel="noopener noreferrer">${t('projects.tryDemo')}</a>` : ''}
                 </div>`;
         }).join('');
 
