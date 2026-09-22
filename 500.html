@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#1e3c72">
+    <title>500 — Ошибка сервера</title>
+    <style>
+        :root { color-scheme: light dark; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 2rem;
+            background: linear-gradient(135deg, #1e3c72, #2a5298); color: #fff; }
+        main { width: min(100%, 38rem); text-align: center; }
+        .code { margin: 0; font-size: clamp(6rem, 22vw, 11rem); font-weight: 800; line-height: 1; letter-spacing: -.06em; }
+        h1 { margin: 1.25rem 0 .75rem; font-size: clamp(1.7rem, 5vw, 2.4rem); }
+        p { margin: 0 auto 2rem; max-width: 30rem; font-size: 1.1rem; line-height: 1.6; color: #e4ecfb; }
+        a { display: inline-block; padding: .8rem 1.6rem; border-radius: 999px; background: #fff;
+            color: #1e3c72; text-decoration: none; font-weight: 700; }
+        a:hover, a:focus-visible { background: #e4ecfb; }
+        button { position: absolute; top: 1.25rem; right: 1.25rem; border: 1px solid #ffffffa0;
+            border-radius: 999px; background: transparent; color: #fff; padding: .5rem 1rem; cursor: pointer; }
+        button:hover, button:focus-visible { background: #ffffff25; }
+    </style>
+</head>
+<body>
+    <button id="language" type="button" aria-label="Switch to English">🇬🇧 EN</button>
+    <main>
+        <div class="code" aria-hidden="true">500</div>
+        <h1 id="heading">Ошибка сервера</h1>
+        <p id="description">Что-то пошло не так. Пожалуйста, попробуйте ещё раз позже.</p>
+        <a id="home" href="/">На главную</a>
+    </main>
+    <script>
+        const messages = {
+            ru: { title: '500 — Ошибка сервера', heading: 'Ошибка сервера',
+                description: 'Что-то пошло не так. Пожалуйста, попробуйте ещё раз позже.', home: 'На главную' },
+            en: { title: '500 — Server error', heading: 'Server error',
+                description: 'Something went wrong. Please try again later.', home: 'Back to home' }
+        };
+        let language = localStorage.getItem('preferredLanguage') === 'en' ? 'en' : 'ru';
+        function render() {
+            const message = messages[language];
+            document.documentElement.lang = language;
+            document.title = message.title;
+            document.getElementById('heading').textContent = message.heading;
+            document.getElementById('description').textContent = message.description;
+            document.getElementById('home').textContent = message.home;
+            const toggle = document.getElementById('language');
+            toggle.textContent = language === 'ru' ? '🇬🇧 EN' : '🇷🇺 RU';
+            toggle.setAttribute('aria-label', language === 'ru' ? 'Switch to English' : 'Переключить на русский');
+        }
+        document.getElementById('language').addEventListener('click', () => {
+            language = language === 'ru' ? 'en' : 'ru';
+            localStorage.setItem('preferredLanguage', language);
+            render();
+        });
+        render();
+    </script>
+</body>
+</html>

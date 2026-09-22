@@ -28,7 +28,10 @@ images/       # Скриншоты проектов и favicon
 Jenkins отслеживает ветку `main` локального bare-репозитория на сервере
 `/mnt/storage/git/klimenko-portfolio.git` и запускает [Jenkinsfile](Jenkinsfile).
 При отправке нового коммита Jenkins вызывает ограниченную SSH-команду,
-которая копирует `index.html` и `images/` в `/var/www/html` и проверяет HTTPS.
+которая копирует `index.html`, `404.html`, `500.html` и `images/` в
+`/var/www/html` и проверяет HTTPS. Директивы
+Apache для основного HTTPS VirtualHost находятся в
+`deploy/apache-error-documents.conf`.
 
 Отправить изменения на сервер:
 
