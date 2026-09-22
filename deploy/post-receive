@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+
+# Forward accepted server updates to GitHub without deleting branches that
+# exist only there (for example, the archived vue branch).
+git push origin --all
+git push origin --tags

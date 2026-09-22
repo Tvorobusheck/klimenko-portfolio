@@ -25,7 +25,9 @@ images/       # Скриншоты проектов и favicon
 
 ## Развертывание
 
-Jenkins отслеживает ветку `main` локального bare-репозитория на сервере
+Локальный `origin` указывает на bare-репозиторий на сервере. Его хук
+`deploy/post-receive` отправляет обновления веток и тегов на GitHub.
+Jenkins отслеживает ветку `main` bare-репозитория на сервере
 `/mnt/storage/git/klimenko-portfolio.git` и запускает [Jenkinsfile](Jenkinsfile).
 При отправке нового коммита Jenkins вызывает ограниченную SSH-команду,
 которая копирует `index.html`, `404.html`, `500.html` и `images/` в
@@ -36,7 +38,7 @@ Apache для основного HTTPS VirtualHost находятся в
 Отправить изменения на сервер:
 
 ```sh
-git push vklimenko main
+git push origin main
 ```
 
 Серверный скрипт находится в `deploy/portfolio-jenkins-deploy`. После его
