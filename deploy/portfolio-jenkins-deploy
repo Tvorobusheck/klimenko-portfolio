@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+
+# This script is installed on the server as a forced SSH command for Jenkins.
+if [[ ! ${SSH_ORIGINAL_COMMAND:-} =~ ^deploy[[:space:]]([0-9a-f]{40})$ ]]; then
+    echo 'Expected: deploy <40-character commit>' >&2
+    exit 2
+fi
+
+revision=${BASH_REMATCH[1]}
+repository=/mnt/storage/git/klimenko-portfolio.git
+site=/var/www/html
+
+git --git-dir="$repository" cat-file -e "$revision^{commit}"
+git --git-dir="$repository" merge-base --is-ancestor "$revision" refs/heads/main
+
+mkdir -p "$HOME/.cache/portfolio-ci"
+exec 9>"$HOME/.cache/portfolio-ci/deploy.lock"
+flock -w 120 9
+
+candidate=$(mktemp -d "$HOME/.cache/portfolio-ci/candidate.XXXXXXXX")
+trap 'rm -rf -- "$candidate"' EXIT
+git --git-dir="$repository" archive "$revision" index.html images | tar -x -C "$candidate"
+test -s "$candidate/index.html"
+test -d "$candidate/images"
+
+# Jenkins has no direct access to Apache's document root. The existing Docker
+# installation provides a short-lived container for the copy operation.
+docker run --rm --network none --user 0:0 \
+    --mount "type=bind,src=$candidate,dst=/candidate,readonly" \
+    --mount "type=bind,src=$site,dst=/site" \
+    jenkins/jenkins:lts-jdk21 \
+    sh -ec 'cp -a /candidate/images/. /site/images/ && cp /candidate/index.html /site/index.html && chown -R www-data:www-data /site/images && chmod -R a+rX /site/images && chmod 644 /site/index.html'
+
+expected=$(sha256sum "$candidate/index.html" | cut -d ' ' -f 1)
+actual=$(sha256sum "$site/index.html" | cut -d ' ' -f 1)
+test "$expected" = "$actual"
+curl --fail --silent --show-error --output /dev/null \
+    --resolve vklimenko.ru:443:127.0.0.1 \
+    https://vklimenko.ru/
+echo "Deployed portfolio commit $revision to $site"
