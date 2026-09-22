@@ -221,13 +221,98 @@
             box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
         }
 
-        .carousel-item img {
+        .image-open {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: transparent;
             cursor: pointer;
-            transition: transform 0.3s ease;
         }
 
-        .carousel-item img:hover {
-            transform: scale(1.02);
+        .image-open:focus-visible {
+            outline: 3px solid var(--primary-color);
+            outline-offset: -3px;
+        }
+
+        #image-viewer {
+            width: 100vw;
+            height: 100dvh;
+            max-width: none;
+            max-height: none;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: #111;
+            color: #fff;
+        }
+
+        #image-viewer::backdrop {
+            background: #111;
+        }
+
+        .viewer-layout {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #viewer-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .viewer-control {
+            position: absolute;
+            z-index: 1;
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        .viewer-control:hover, .viewer-control:focus-visible {
+            background: rgba(50, 50, 50, 0.95);
+        }
+
+        .viewer-control[hidden] { display: none; }
+
+        .viewer-close { top: 16px; right: 16px; }
+        .viewer-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+        .viewer-next { right: 16px; top: 50%; transform: translateY(-50%); }
+
+        .viewer-caption {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .viewer-caption a { color: #fff; }
+
+        @media (max-width: 600px) {
+            .viewer-prev { left: 8px; }
+            .viewer-next { right: 8px; }
+            .viewer-close { top: 8px; right: 8px; }
+            .viewer-caption { bottom: 8px; font-size: 0.85rem; }
         }
 
         .carousel-control-prev-icon,
@@ -465,6 +550,16 @@
     </section>
 </div>
 
+<dialog id="image-viewer" aria-label="Просмотр изображения">
+    <div class="viewer-layout">
+        <button class="viewer-control viewer-close" type="button" aria-label="Закрыть">&times;</button>
+        <button class="viewer-control viewer-prev" type="button" aria-label="Предыдущее изображение">&#8249;</button>
+        <img id="viewer-image" alt="">
+        <button class="viewer-control viewer-next" type="button" aria-label="Следующее изображение">&#8250;</button>
+        <div class="viewer-caption"><span id="viewer-counter"></span> · <a id="viewer-original" href="" target="_blank" rel="noopener noreferrer">Открыть оригинал</a></div>
+    </div>
+</dialog>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     const translations = {
@@ -539,6 +634,10 @@
                 next: 'Следующий',
                 technologies: 'Технологии',
                 tryDemo: 'Попробовать демо',
+                openImage: 'Открыть изображение',
+                imageViewer: 'Просмотр изображения',
+                closeImage: 'Закрыть',
+                originalImage: 'Открыть оригинал',
                 items: [
                     {
                         title: 'ЗдоровоПит',
@@ -652,6 +751,10 @@
                 next: 'Next',
                 technologies: 'Technologies',
                 tryDemo: 'Try demo',
+                openImage: 'Open image',
+                imageViewer: 'Image viewer',
+                closeImage: 'Close',
+                originalImage: 'Open original',
                 items: [
                     {
                         title: 'HealthyEat',
@@ -717,7 +820,9 @@
             const carouselId = 'carouselProject' + index;
             const slides = project.images.map((image, imgIndex) => `
                 <div class="carousel-item${imgIndex === 0 ? ' active' : ''}">
-                    <img src="${image}" class="d-block w-100" alt="${project.title} screenshot ${imgIndex + 1}">
+                    <button class="image-open" type="button" data-project="${index}" data-image="${imgIndex}" aria-label="${t('projects.openImage')}: ${project.title}, ${imgIndex + 1}">
+                        <img src="${image}" class="d-block w-100" alt="${project.title} screenshot ${imgIndex + 1}">
+                    </button>
                 </div>`).join('');
             const controls = project.images.length > 1 ? `
                 <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
@@ -746,6 +851,71 @@
         });
     }
 
+    const imageViewer = document.getElementById('image-viewer');
+    let viewerProjectIndex = 0;
+    let viewerImageIndex = 0;
+    let viewerTrigger = null;
+    let swipeStartX = null;
+
+    function updateViewer() {
+        const project = t('projects.items')[viewerProjectIndex];
+        const image = project.images[viewerImageIndex];
+        document.getElementById('viewer-image').src = image;
+        document.getElementById('viewer-image').alt = `${project.title} screenshot ${viewerImageIndex + 1}`;
+        document.getElementById('viewer-counter').textContent = `${project.title} · ${viewerImageIndex + 1} / ${project.images.length}`;
+        document.getElementById('viewer-original').href = image;
+        document.getElementById('viewer-original').textContent = t('projects.originalImage');
+        imageViewer.setAttribute('aria-label', t('projects.imageViewer'));
+        imageViewer.querySelector('.viewer-close').setAttribute('aria-label', t('projects.closeImage'));
+        imageViewer.querySelector('.viewer-prev').setAttribute('aria-label', t('projects.previous'));
+        imageViewer.querySelector('.viewer-next').setAttribute('aria-label', t('projects.next'));
+        imageViewer.querySelector('.viewer-prev').hidden = project.images.length < 2;
+        imageViewer.querySelector('.viewer-next').hidden = project.images.length < 2;
+    }
+
+    function changeViewerImage(direction) {
+        const images = t('projects.items')[viewerProjectIndex].images;
+        viewerImageIndex = (viewerImageIndex + direction + images.length) % images.length;
+        updateViewer();
+    }
+
+    document.getElementById('projects-container').addEventListener('click', event => {
+        const trigger = event.target.closest('.image-open');
+        if (!trigger) return;
+        viewerProjectIndex = Number(trigger.dataset.project);
+        viewerImageIndex = Number(trigger.dataset.image);
+        viewerTrigger = trigger;
+        updateViewer();
+        document.querySelectorAll('.carousel').forEach(el => bootstrap.Carousel.getInstance(el)?.pause());
+        imageViewer.showModal();
+    });
+
+    imageViewer.querySelector('.viewer-close').addEventListener('click', () => imageViewer.close());
+    imageViewer.querySelector('.viewer-prev').addEventListener('click', () => changeViewerImage(-1));
+    imageViewer.querySelector('.viewer-next').addEventListener('click', () => changeViewerImage(1));
+    imageViewer.addEventListener('close', () => {
+        document.querySelectorAll('.carousel').forEach(el => bootstrap.Carousel.getInstance(el)?.cycle());
+        if (viewerTrigger?.isConnected) viewerTrigger.focus();
+    });
+    imageViewer.addEventListener('click', event => {
+        if (event.target === imageViewer || event.target.classList.contains('viewer-layout')) imageViewer.close();
+    });
+    imageViewer.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+            event.preventDefault();
+            changeViewerImage(event.key === 'ArrowLeft' ? -1 : 1);
+        }
+    });
+    imageViewer.addEventListener('touchstart', event => {
+        swipeStartX = event.touches[0].clientX;
+    }, { passive: true });
+    imageViewer.addEventListener('touchend', event => {
+        if (swipeStartX === null) return;
+        const distance = event.changedTouches[0].clientX - swipeStartX;
+        if (Math.abs(distance) > 50) changeViewerImage(distance > 0 ? -1 : 1);
+        swipeStartX = null;
+    }, { passive: true });
+
     function applyLanguage() {
         document.documentElement.lang = currentLanguage;
         document.title = currentLanguage === 'ru' ? 'Клименко Портфолио' : 'Klimenko Portfolio';
@@ -758,6 +928,7 @@
         renderList('skills-programming-list', t('skills.programmingItems'));
         renderList('skills-other-list', t('skills.otherItems'));
         renderProjects();
+        if (imageViewer.open) updateViewer();
 
         const toggleBtn = document.getElementById('lang-toggle');
         toggleBtn.textContent = currentLanguage === 'ru' ? '🇬🇧 EN' : '🇷🇺 RU';
