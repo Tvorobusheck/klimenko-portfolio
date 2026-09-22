@@ -20,11 +20,12 @@ flock -w 120 9
 
 candidate=$(mktemp -d "$HOME/.cache/portfolio-ci/candidate.XXXXXXXX")
 trap 'rm -rf -- "$candidate"' EXIT
-git --git-dir="$repository" archive "$revision" index.html 404.html 500.html images | tar -x -C "$candidate"
+git --git-dir="$repository" archive "$revision" index.html 404.html 500.html images videos | tar -x -C "$candidate"
 test -s "$candidate/index.html"
 test -s "$candidate/404.html"
 test -s "$candidate/500.html"
 test -d "$candidate/images"
+test -d "$candidate/videos"
 
 # Jenkins has no direct access to Apache's document root. The existing Docker
 # installation provides a short-lived container for the copy operation.
@@ -32,7 +33,7 @@ docker run --rm --network none --user 0:0 \
     --mount "type=bind,src=$candidate,dst=/candidate,readonly" \
     --mount "type=bind,src=$site,dst=/site" \
     jenkins/jenkins:lts-jdk21 \
-    sh -ec 'cp -a /candidate/images/. /site/images/ && cp /candidate/index.html /candidate/404.html /candidate/500.html /site/ && chown -R www-data:www-data /site/images && chmod -R a+rX /site/images && chmod 644 /site/index.html /site/404.html /site/500.html'
+    sh -ec 'mkdir -p /site/videos && cp -a /candidate/images/. /site/images/ && cp -a /candidate/videos/. /site/videos/ && cp /candidate/index.html /candidate/404.html /candidate/500.html /site/ && chown -R www-data:www-data /site/images /site/videos && chmod -R a+rX /site/images /site/videos && chmod 644 /site/index.html /site/404.html /site/500.html'
 
 expected=$(sha256sum "$candidate/index.html" | cut -d ' ' -f 1)
 actual=$(sha256sum "$site/index.html" | cut -d ' ' -f 1)

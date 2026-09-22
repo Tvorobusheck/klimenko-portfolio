@@ -214,6 +214,58 @@
             color: #212529;
         }
 
+        .showcase-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .showcase-media {
+            min-width: 0;
+        }
+
+        .showcase-media video {
+            display: block;
+            width: min(100%, 400px);
+            aspect-ratio: 4 / 5;
+            margin-inline: auto;
+            border-radius: 0.75rem;
+            background: #111;
+            object-fit: contain;
+        }
+
+        .showcase-gallery-label {
+            margin: 1.25rem 0 0.5rem;
+            font-weight: 600;
+        }
+
+        .showcase-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.5rem;
+        }
+
+        .showcase-gallery .image-open {
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+        }
+
+        .showcase-gallery img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .showcase-copy p { margin-bottom: 1.25rem; }
+
+        @media (max-width: 900px) {
+            .showcase-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+
         .carousel {
             margin-bottom: 1.5rem;
             border-radius: 0.5rem;
@@ -634,6 +686,8 @@
                 next: 'Следующий',
                 technologies: 'Технологии',
                 tryDemo: 'Попробовать демо',
+                screenshots: 'Скриншоты интерфейса',
+                video: 'Видео о проекте ЗдоровоПит',
                 openImage: 'Открыть изображение',
                 imageViewer: 'Просмотр изображения',
                 closeImage: 'Закрыть',
@@ -644,17 +698,15 @@
                         demoUrl: 'https://zdorovopit.vklimenko.ru',
                         description: 'Сервис по доставке здорового питания с возможностью подбора индивидуального рациона в зависимости от целей пользователя (похудение, набор мышечной массы, поддержание веса).',
                         technologies: 'Django, Python, HTML, CSS, JavaScript, Docker, Docker Registry, Docker Swarm, Jenkins, Celery, Redis, WebSocket, Nginx, PostgreSQL, Git',
+                        video: '/videos/healthyeat/yandex-ad.mp4',
+                        videoPoster: '/images/healthyeat/demo/ad-poster.jpg',
                         images: [
-                            '/images/healthyeat/registration.png',
-                            '/images/healthyeat/login.png',
-                            '/images/healthyeat/pay.png',
-                            '/images/healthyeat/meal.png',
-                            '/images/healthyeat/diary.png',
-                            '/images/healthyeat/schedule.png',
-                            '/images/healthyeat/diet.png',
-                            '/images/healthyeat/swagger.png',
-                            '/images/healthyeat/redoc.png'
-                        ]
+                            '/images/healthyeat/demo/meal.jpg',
+                            '/images/healthyeat/demo/day_stats_with_menu.jpg',
+                            '/images/healthyeat/demo/product_info.jpg',
+                            '/images/healthyeat/demo/camera_recognition.jpg'
+                        ],
+                        imageLabels: ['Состав приёма пищи', 'Статистика питания', 'Пищевая ценность продукта', 'Распознавание еды по фото']
                     },
                     {
                         title: 'ChatGPT In Ru',
@@ -751,6 +803,8 @@
                 next: 'Next',
                 technologies: 'Technologies',
                 tryDemo: 'Try demo',
+                screenshots: 'Interface screenshots',
+                video: 'HealthyEat project video',
                 openImage: 'Open image',
                 imageViewer: 'Image viewer',
                 closeImage: 'Close',
@@ -761,17 +815,15 @@
                         demoUrl: 'https://zdorovopit.vklimenko.ru',
                         description: 'A healthy food delivery service with the ability to select an individual diet based on user goals (weight loss, muscle gain, weight maintenance).',
                         technologies: 'Django, Python, HTML, CSS, JavaScript, Docker, Docker Registry, Docker Swarm, Jenkins, Celery, Redis, WebSocket, Nginx, PostgreSQL, Git',
+                        video: '/videos/healthyeat/yandex-ad.mp4',
+                        videoPoster: '/images/healthyeat/demo/ad-poster.jpg',
                         images: [
-                            '/images/healthyeat/registration.png',
-                            '/images/healthyeat/login.png',
-                            '/images/healthyeat/pay.png',
-                            '/images/healthyeat/meal.png',
-                            '/images/healthyeat/diary.png',
-                            '/images/healthyeat/schedule.png',
-                            '/images/healthyeat/diet.png',
-                            '/images/healthyeat/swagger.png',
-                            '/images/healthyeat/redoc.png'
-                        ]
+                            '/images/healthyeat/demo/meal.jpg',
+                            '/images/healthyeat/demo/day_stats_with_menu.jpg',
+                            '/images/healthyeat/demo/product_info.jpg',
+                            '/images/healthyeat/demo/camera_recognition.jpg'
+                        ],
+                        imageLabels: ['Meal ingredients', 'Nutrition statistics', 'Product nutrition facts', 'Food recognition by photo']
                     },
                     {
                         title: 'ChatGPT In Ru',
@@ -833,16 +885,34 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">${t('projects.next')}</span>
                 </button>` : '';
+            const media = project.video ? `
+                <div class="showcase-media">
+                    <video controls playsinline preload="none" poster="${project.videoPoster}" aria-label="${t('projects.video')}">
+                        <source src="${project.video}" type="video/mp4">
+                    </video>
+                    <p class="showcase-gallery-label">${t('projects.screenshots')}</p>
+                    <div class="showcase-gallery">
+                        ${project.images.map((image, imgIndex) => `
+                            <button class="image-open" type="button" data-project="${index}" data-image="${imgIndex}" aria-label="${t('projects.openImage')}: ${project.imageLabels[imgIndex]}">
+                                <img src="${image}" alt="${project.imageLabels[imgIndex]}" loading="lazy" decoding="async">
+                            </button>`).join('')}
+                    </div>
+                </div>` : `
+                <div id="${carouselId}" class="carousel slide mb-3">
+                    <div class="carousel-inner">${slides}</div>
+                    ${controls}
+                </div>`;
             return `
                 <div class="project mb-5">
                     <h3>${project.title}</h3>
-                    <div id="${carouselId}" class="carousel slide mb-3">
-                        <div class="carousel-inner">${slides}</div>
-                        ${controls}
+                    <div class="${project.video ? 'showcase-layout' : ''}">
+                        ${media}
+                        <div class="${project.video ? 'showcase-copy' : ''}">
+                            <p>${project.description}</p>
+                            <p><strong>${t('projects.technologies')}:</strong> ${project.technologies}</p>
+                            ${project.demoUrl ? `<a class="btn btn-primary" href="${project.demoUrl}" target="_blank" rel="noopener noreferrer">${t('projects.tryDemo')}</a>` : ''}
+                        </div>
                     </div>
-                    <p>${project.description}</p>
-                    <p><strong>${t('projects.technologies')}:</strong> ${project.technologies}</p>
-                    ${project.demoUrl ? `<a class="btn btn-primary" href="${project.demoUrl}" target="_blank" rel="noopener noreferrer">${t('projects.tryDemo')}</a>` : ''}
                 </div>`;
         }).join('');
 
@@ -861,7 +931,7 @@
         const project = t('projects.items')[viewerProjectIndex];
         const image = project.images[viewerImageIndex];
         document.getElementById('viewer-image').src = image;
-        document.getElementById('viewer-image').alt = `${project.title} screenshot ${viewerImageIndex + 1}`;
+        document.getElementById('viewer-image').alt = project.imageLabels?.[viewerImageIndex] ?? `${project.title} screenshot ${viewerImageIndex + 1}`;
         document.getElementById('viewer-counter').textContent = `${project.title} · ${viewerImageIndex + 1} / ${project.images.length}`;
         document.getElementById('viewer-original').href = image;
         document.getElementById('viewer-original').textContent = t('projects.originalImage');
