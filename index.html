@@ -280,6 +280,24 @@
             box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
         }
 
+        .carousel-inner {
+            aspect-ratio: 16 / 9;
+            background: #fff;
+        }
+
+        .carousel-item,
+        .carousel-item.active,
+        .carousel-item-next,
+        .carousel-item-prev,
+        .carousel .image-open {
+            height: 100%;
+        }
+
+        .carousel .image-open img {
+            height: 100%;
+            object-fit: contain;
+        }
+
         .image-open {
             display: block;
             width: 100%;
