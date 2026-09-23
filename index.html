@@ -262,6 +262,13 @@
 
         .showcase-copy p { margin-bottom: 1.25rem; }
 
+        .certificate-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1rem 0 1.25rem;
+        }
+
         @media (max-width: 900px) {
             .showcase-layout { grid-template-columns: 1fr; gap: 1.5rem; }
         }
@@ -685,6 +692,7 @@
                 previous: 'Предыдущий',
                 next: 'Следующий',
                 technologies: 'Технологии',
+                certificates: 'Государственная регистрация программы для ЭВМ',
                 tryDemo: 'Попробовать демо',
                 screenshots: 'Скриншоты интерфейса',
                 video: 'Видео о проекте ЗдоровоПит',
@@ -709,6 +717,23 @@
                         imageLabels: ['Состав приёма пищи', 'Статистика питания', 'Пищевая ценность продукта', 'Распознавание еды по фото']
                     },
                     {
+                        title: 'Планировщик производства для ЦБК',
+                        description: 'Автономный программный комплекс для планирования производства и раскроя рулонов на целлюлозно-бумажном предприятии. Система строит планы выпуска и раскроя с помощью генетического поиска или полного перебора, формирует расписание операций и оценивает его устойчивость методом дискретно-событийного имитационного моделирования. Входные данные и отчёты поддерживаются в форматах Excel и CSV.',
+                        technologies: 'Python, Tkinter, Pandas, OpenPyXL, argparse, генетические алгоритмы, полный перебор, дискретно-событийное моделирование, Excel, CSV, JSON',
+                        images: [
+                            '/images/production-planner/main.png',
+                            '/images/production-planner/main_gantt.png',
+                            '/images/production-planner/main_simulation.png',
+                            '/images/production-planner/output_summary.png',
+                            '/images/production-planner/output_cutting_plans.png',
+                            '/images/production-planner/output_schedule_1.png'
+                        ],
+                        certificates: [
+                            { label: 'Свидетельство № 2024611544', url: '/documents/certificates/2024611544_program_registration.pdf' },
+                            { label: 'Свидетельство № 2026618647', url: '/documents/certificates/2026618647_program_registration.pdf' }
+                        ]
+                    },
+                    {
                         title: 'ChatGPT In Ru',
                         description: 'chatgptin.ru позволял общаться с ChatGPT, когда эта нейросеть начинала набирать обороты. Также была поддержка генерации изображений через Dall-E. Технически все хорошо работало и нравилось пользователям. Однако проект пришлось закрыть, так как реклама не окупала затраты на инфраструктуру и api-ключи ChatGPT.',
                         technologies: 'Django, Python, HTML, CSS, JavaScript, Docker, Docker Registry, Docker Swarm, Jenkins, Celery, Redis, WebSocket, Nginx, PostgreSQL, Git',
@@ -718,15 +743,6 @@
                             '/images/chatgptinru/performance.png',
                             '/images/chatgptinru/metrika.png',
                             '/images/chatgptinru/panel.png'
-                        ]
-                    },
-                    {
-                        title: 'Решатель задачи линейного раскроя',
-                        description: 'Данный проект был разработан в рамках моей научной диссертации. По мере развития научных разработок я планирую дорабатывать Robopaper.',
-                        technologies: 'Django, Python, HTML, CSS, JavaScript, PostgreSQL',
-                        images: [
-                            '/images/robopaper/main.png',
-                            '/images/robopaper/feedback.png'
                         ]
                     }
                 ]
@@ -802,6 +818,7 @@
                 previous: 'Previous',
                 next: 'Next',
                 technologies: 'Technologies',
+                certificates: 'State software registration',
                 tryDemo: 'Try demo',
                 screenshots: 'Interface screenshots',
                 video: 'HealthyEat project video',
@@ -826,6 +843,23 @@
                         imageLabels: ['Meal ingredients', 'Nutrition statistics', 'Product nutrition facts', 'Food recognition by photo']
                     },
                     {
+                        title: 'Pulp and Paper Production Planner',
+                        description: 'A standalone application for planning roll production and cutting at pulp and paper mills. It builds production and cutting plans using genetic search or full enumeration, schedules operations, and evaluates schedule robustness through discrete event simulation. Input data and reports are supported in Excel and CSV formats.',
+                        technologies: 'Python, Tkinter, Pandas, OpenPyXL, argparse, genetic algorithms, full enumeration, discrete event simulation, Excel, CSV, JSON',
+                        images: [
+                            '/images/production-planner/main.png',
+                            '/images/production-planner/main_gantt.png',
+                            '/images/production-planner/main_simulation.png',
+                            '/images/production-planner/output_summary.png',
+                            '/images/production-planner/output_cutting_plans.png',
+                            '/images/production-planner/output_schedule_1.png'
+                        ],
+                        certificates: [
+                            { label: 'Registration certificate No. 2024611544', url: '/documents/certificates/2024611544_program_registration.pdf' },
+                            { label: 'Registration certificate No. 2026618647', url: '/documents/certificates/2026618647_program_registration.pdf' }
+                        ]
+                    },
+                    {
                         title: 'ChatGPT In Ru',
                         description: 'chatgptin.ru allowed users to chat with ChatGPT when this neural network was just gaining popularity. It also supported image generation via Dall-E. Technically, everything worked well and was liked by users. However, the project had to be closed as advertising did not cover the costs of infrastructure and ChatGPT API keys.',
                         technologies: 'Django, Python, HTML, CSS, JavaScript, Docker, Docker Registry, Docker Swarm, Jenkins, Celery, Redis, WebSocket, Nginx, PostgreSQL, Git',
@@ -835,15 +869,6 @@
                             '/images/chatgptinru/performance.png',
                             '/images/chatgptinru/metrika.png',
                             '/images/chatgptinru/panel.png'
-                        ]
-                    },
-                    {
-                        title: 'Linear Cutting Problem Solver',
-                        description: 'This project was developed as part of my scientific dissertation. As my research progresses, I plan to continue developing Robopaper.',
-                        technologies: 'Django, Python, HTML, CSS, JavaScript, PostgreSQL',
-                        images: [
-                            '/images/robopaper/main.png',
-                            '/images/robopaper/feedback.png'
                         ]
                     }
                 ]
@@ -910,6 +935,11 @@
                         <div class="${project.video ? 'showcase-copy' : ''}">
                             <p>${project.description}</p>
                             <p><strong>${t('projects.technologies')}:</strong> ${project.technologies}</p>
+                            ${project.certificates ? `
+                                <p class="mb-2"><strong>${t('projects.certificates')}:</strong></p>
+                                <div class="certificate-links">
+                                    ${project.certificates.map(certificate => `<a class="btn btn-outline-primary" href="${certificate.url}" target="_blank" rel="noopener noreferrer"><i class="fas fa-certificate me-2" aria-hidden="true"></i>${certificate.label}</a>`).join('')}
+                                </div>` : ''}
                             ${project.demoUrl ? `<a class="btn btn-primary" href="${project.demoUrl}" target="_blank" rel="noopener noreferrer">${t('projects.tryDemo')}</a>` : ''}
                         </div>
                     </div>
